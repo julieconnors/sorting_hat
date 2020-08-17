@@ -1,17 +1,35 @@
 class SortingHat::Houses
-        attr_accessor :name, :founder, :house_ghost, :values, :house_colors
-        
-        @@all = []
-        
-        def initialize(house_info)
-          house_info.each do |trait, value|
-            self.send("#{trait}=", value)
-          end
-          @@all << self
-        end
-        
-        def self.all
-          @@all
-        end
-
-end
+    attr_accessor :values, :name, :colors, :house_ghost, :id, :founder, :mascot
+    
+    @@all = []
+    @@values
+    
+    def initialize(values, name, colors, house_ghost, id, founder, mascot)
+      @values = values
+      @name = name
+      @colors = colors
+      @house_ghost = house_ghost
+      @id = id
+      @founder = founder
+      @mascot = mascot
+      save
+      @@values << values
+    end
+    
+    def self.all
+      @@all
+    end
+    
+    def save
+      @@all << self
+    end
+    
+    def self.display_values
+      @@values
+    end
+    
+    def self.find_by_name(name)
+      @@all.detect{|house| house.name == name}
+    end
+    
+  end
