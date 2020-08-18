@@ -1,19 +1,28 @@
 class SortingHat::Houses
-    attr_accessor :values, :name, :colors, :house_ghost, :id, :founder, :mascot
+    attr_accessor :values, :name, :colors, :house_ghost, :founder, :mascot, :head_of_house
     
     @@all = []
     @@values = []
     
-    def initialize(values, name, colors, house_ghost, id, founder, mascot)
-      @values = values
-      @name = name
-      @colors = colors
-      @house_ghost = house_ghost
+    def initialize(id, name, mascot, head_of_house, house_ghost, founder, values, colors)
       @id = id
-      @founder = founder
+      @name = name
       @mascot = mascot
+      @house_ghost = house_ghost
+      @head_of_house = head_of_house
+      @founder = founder
+      @values = values
+      @colors = colors
       save
     end
+
+    # metaprogramming version
+    # def initialize(attributes)
+    #   binding.pry
+    #   attributes.each do |key, value|
+    #     self.send("#{key}=", value)
+    #   end
+    # end
     
     def self.all
       @@all
@@ -23,10 +32,13 @@ class SortingHat::Houses
       @@all << self
       @@values << @values
     end
+
+    # def save_values
+    #   @@values << @values
+    # end
     
     def self.display_values
-      binding.pry
-      @@values
+      @@values.flatten
     end
     
     def self.find_by_name(name)
