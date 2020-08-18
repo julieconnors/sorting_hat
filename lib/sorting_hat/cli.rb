@@ -1,4 +1,4 @@
-class SortingHat::Cli
+class SortingHat::CLI
   
     def greet  
         puts "\nWelcome to Hogwarts!"
@@ -9,43 +9,56 @@ class SortingHat::Cli
       else
         puts "\nNice to meet you, #{name_input}! Let's figure out which house is for you."
       end
-      
+      SortingHat::API.new.get_houses
+      menu
     end
-#We want to display a list of values for all houses and have the user select a value 
+
+    def menu
+      get_user_values
+      sort_student
+      display_house
+      display_house_info
+    end
+ 
     def get_user_values
       puts "Choose a quality that best describes you:"
-      #display values from House class
-      input = gets.strip
-      #find_by_value
-      #display house object
+      binding.pry
+      SortingHat::Houses.all
+      @input = gets.strip
     end
-#based on the value selection the user will be placed in the House that the value belongs to
-#we will display the House object with all attributes with a message "Here's more about your house"
+   
+    def sort_student
+      @house = SortingHat::Houses.find_by_value(@input)
+      puts "It better be #{@house}!"
+    end
+
+    def display_house_info
+      puts "Find out more about #{@house}:"
+      list_attr_menu
+      display_attr
+    end
+
+    def list_attr_menu
+      puts "1. colors"
+      puts "2. house ghost"
+      puts "3. founder"
+      puts "4. mascot"
+      @house_attr_selection = gets.strip
+    end
+
+    def display_attr
+      case @house_attr_selection
+      when "1"
+        puts @house.colors
+      when "2"
+        puts @house.house_ghost
+      when "3"
+        puts @house.founder
+      when "4"
+        puts @house.mascot
+      end
+    end
+   
 #provide a list of students belonging to the house?
 
-  end
-
-  # class Prac::Cli
-  
-  #   def greet  
-  #     puts "\nWelcome to Hogwarts!\n"
-  #     puts "\nLet's figure out which House is for you. What's your name?"
-  #     Prac
-  #     name_input = gets.strip
-  #       if name_input == "Harry Potter"
-  #         puts "The famous Harry Potter!"
-  #       else
-  #         puts "Nice to meet you, #{name_input}! Tell me, what quality most describes you?"
-  #       end
-  #     input = gets.strip
-  #     Prac::Api.new.get_houses
-  #     binding.pry
-  #   end
-    
-  #   def list_all_values
-      
-  #   end
-    
-    
-    
-  # end
+end

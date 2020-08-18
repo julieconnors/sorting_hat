@@ -2,7 +2,7 @@ class SortingHat::Houses
     attr_accessor :values, :name, :colors, :house_ghost, :id, :founder, :mascot
     
     @@all = []
-    @@values
+    @@values = []
     
     def initialize(values, name, colors, house_ghost, id, founder, mascot)
       @values = values
@@ -13,7 +13,6 @@ class SortingHat::Houses
       @founder = founder
       @mascot = mascot
       save
-      @@values << values
     end
     
     def self.all
@@ -22,9 +21,11 @@ class SortingHat::Houses
     
     def save
       @@all << self
+      @@values << @values
     end
     
     def self.display_values
+      binding.pry
       @@values
     end
     
@@ -32,4 +33,11 @@ class SortingHat::Houses
       @@all.detect{|house| house.name == name}
     end
     
+    def self.find_by_value(value)
+      #binding.pry
+      @@values.detect{|value| house.values.include?(value)}
+    end
+
+    
+
   end
