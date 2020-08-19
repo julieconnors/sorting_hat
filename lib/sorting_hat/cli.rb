@@ -18,6 +18,8 @@ class SortingHat::CLI
       sort_student
       display_house_info
     end
+
+    #add validity check
  
     def get_user_values
       puts "\nChoose a quality that best describes you:"
@@ -45,6 +47,7 @@ class SortingHat::CLI
       puts "3. House ghost"
       puts "4. Founder"
       puts "5. House mascot"
+      puts "6. Students in House"
       @info_selection = gets.strip
     end
 
@@ -60,6 +63,8 @@ class SortingHat::CLI
         puts @house.founder
       when 5
         puts @house.mascot
+      when 6 
+        puts @house.members
       end
     end
 

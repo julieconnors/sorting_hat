@@ -1,23 +1,24 @@
 class SortingHat::Houses
-    attr_accessor :values, :name, :colors, :house_ghost, :founder, :mascot, :head_of_house
+    attr_accessor :name, :mascot, :head_of_house, :house_ghost, :founder, :members, :values, :colors
     
     @@all = []
     @@values = []
     
-    def initialize(name, mascot, head_of_house, house_ghost, founder, values, colors)
+    def initialize(name, mascot, head_of_house, house_ghost, founder, members, values, colors)
       @name = name
       @mascot = mascot
       @house_ghost = house_ghost
       @head_of_house = head_of_house
       @founder = founder
+      @members = members
       @values = values
       @colors = colors
       save
     end
 
-    # metaprogramming version
+    #metaprogramming version
     # def initialize(attributes)
-    #   binding.pry
+    #   #binding.pry
     #   attributes.each do |key, value|
     #     self.send("#{key}=", value) if self.respond_to?(key)
     #   end
