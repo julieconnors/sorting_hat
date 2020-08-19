@@ -4,8 +4,7 @@ class SortingHat::Houses
     @@all = []
     @@values = []
     
-    def initialize(id, name, mascot, head_of_house, house_ghost, founder, values, colors)
-      @id = id
+    def initialize(name, mascot, head_of_house, house_ghost, founder, values, colors)
       @name = name
       @mascot = mascot
       @house_ghost = house_ghost
@@ -49,6 +48,8 @@ class SortingHat::Houses
       @@values.flatten[input.to_i - 1]
     end
 
-    
+    # def self.display_attributes
+    #   @@all.detect{}
+    # end
 
   end

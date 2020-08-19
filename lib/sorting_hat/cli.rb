@@ -15,13 +15,12 @@ class SortingHat::CLI
 
     def menu
       get_user_values
-      #binding.pry
       sort_student
-      #display_house_info
+      display_house_info
     end
  
     def get_user_values
-      puts "Choose a quality that best describes you:"
+      puts "\nChoose a quality that best describes you:"
       SortingHat::Houses.display_values.each.with_index(1) do |value, index|
         puts "#{index}. #{value}"
       end
@@ -29,38 +28,39 @@ class SortingHat::CLI
     end
    
     def sort_student
-      @value = SortingHat::Houses.find_value_by_index(@input)
+      @value = SortingHat::Houses.find_value_by_input(@input)
       @house = SortingHat::Houses.find_by_value(@value)
-      puts "It better be #{@house.name}!"
+      puts "\nIt better be #{@house.name}!"
     end
 
     def display_house_info
-      puts "Find out more about #{@house.name}:"
-      list_attr_menu
-      display_attr
+      puts "\nFind out more about #{@house.name}:"
+      list_info_menu
+      display_info
     end
 
-    def list_attr_menu
-      puts "1. colors"
-      puts "2. house ghost"
-      puts "3. founder"
-      puts "4. mascot"
-      @house_attr_selection = gets.strip
+    def list_info_menu
+      puts "1. Head of House"
+      puts "2. House colors"
+      puts "3. House ghost"
+      puts "4. Founder"
+      puts "5. House mascot"
+      @info_selection = gets.strip
     end
 
-    def display_attr
-      case @house_attr_selection
-      when "1"
+    def display_info
+      case @info_selection.to_i
+      when 1
+        puts @house.head_of_house
+      when 2
         puts @house.colors
-      when "2"
+      when 3
         puts @house.house_ghost
-      when "3"
+      when 4
         puts @house.founder
-      when "4"
+      when 5
         puts @house.mascot
       end
     end
-   
-#provide a list of students belonging to the house?
 
 end
