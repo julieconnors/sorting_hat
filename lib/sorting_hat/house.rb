@@ -42,8 +42,11 @@ class SortingHat::Houses
     end
     
     def self.find_by_value(value)
-      binding.pry
-      @@values.detect{|value| @@values.include?(value)}
+      @@all.detect{|house| house.values.include?(value)}
+    end
+
+    def self.find_value_by_input(input)
+      @@values.flatten[input.to_i - 1]
     end
 
     
