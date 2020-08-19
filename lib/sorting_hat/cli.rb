@@ -10,6 +10,7 @@ class SortingHat::CLI
         puts "\nNice to meet you, #{name_input}! Let's figure out which house is for you."
       end
       SortingHat::API.new.get_houses
+      SortingHat::API.new.get_characters
       menu
     end
 
@@ -52,6 +53,7 @@ class SortingHat::CLI
     end
 
     def display_info
+      #binding.pry
       case @info_selection.to_i
       when 1
         puts @house.head_of_house
@@ -64,7 +66,8 @@ class SortingHat::CLI
       when 5
         puts @house.mascot
       when 6 
-        puts @house.members
+        students = SortingHat::Characters.find_by_house(@house)
+        puts students
       end
     end
 

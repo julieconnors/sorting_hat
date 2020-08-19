@@ -5,7 +5,10 @@ class SortingHat::API
           url = 'https://www.potterapi.com/v1/characters?key=$2a$10$8pVxgJY1bNwi0sG..SoHvONSdckcCtdQLrOEOayFPSx02AlFBrNDi'
           response = HTTParty.get(url)
           response.each do |character_hash|
-            character_hash["name"]
+            name = character_hash["name"]
+            role = character_hash["role"]
+            house = character_hash["house"]
+            SortingHat::Characters.new(name, role, house)
           end
         end
 

@@ -2,6 +2,7 @@ require_relative "sorting_hat/version"
 require_relative "sorting_hat/cli"
 require_relative "sorting_hat/api"
 require_relative "sorting_hat/house"
+require_relative "sorting_hat/character"
 
 require "pry"
 require "httparty"
