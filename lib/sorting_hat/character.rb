@@ -21,7 +21,7 @@ class SortingHat::Characters
     end
 
     def add_student
-        binding.pry
+        #binding.pry
         @@all.each do |character| 
             character.role == "student"
             @@students << character
@@ -29,9 +29,11 @@ class SortingHat::Characters
     end
 
     def self.find_by_house(house)
-        binding.pry
+        #binding.pry
         @@students.select{|student| student.house == house}
     end
+
+
 
 
 end

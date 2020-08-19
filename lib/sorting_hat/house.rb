@@ -49,6 +49,7 @@ class SortingHat::Houses
       @@values.flatten[input.to_i - 1]
     end
 
+    
     # def self.display_attributes
     #   @@all.detect{}
     # end
