@@ -20,7 +20,7 @@ class SortingHat::Houses
     # def initialize(attributes)
     #   binding.pry
     #   attributes.each do |key, value|
-    #     self.send("#{key}=", value)
+    #     self.send("#{key}=", value) if self.respond_to?(key)
     #   end
     # end
     
@@ -32,10 +32,6 @@ class SortingHat::Houses
       @@all << self
       @@values << @values
     end
-
-    # def save_values
-    #   @@values << @values
-    # end
     
     def self.display_values
       @@values.flatten
@@ -46,8 +42,8 @@ class SortingHat::Houses
     end
     
     def self.find_by_value(value)
-      #binding.pry
-      @@values.detect{|value| house.values.include?(value)}
+      binding.pry
+      @@values.detect{|value| @@values.include?(value)}
     end
 
     

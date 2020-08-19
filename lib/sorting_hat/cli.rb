@@ -15,22 +15,30 @@ class SortingHat::CLI
 
     def menu
       get_user_values
-      sort_student
-      display_house
-      display_house_info
+      #sort_student
+      #display_house_info
     end
  
     def get_user_values
       puts "Choose a quality that best describes you:"
-      binding.pry
-      SortingHat::Houses.all
+      SortingHat::Houses.display_values.each.with_index(1) do |value, index|
+        puts "#{index}. #{value}"
+      end
       @input = gets.strip
+      if @input == 1 || @input == 2 || @input == 3 || @input == 4
+        puts "It better be Gryffindor!"
+      elsif @input == 5 || @input == 6 || @input == 7 || @input == 8
+        puts "It better be Ravenclaw!"
+      elsif @input == 9 || @input == 10 || @input == 11 || @input == 12
+        puts "It better be Slytherin!"
+      else
+        puts "It better be Hufflepuff!"
+      end
     end
    
-    def sort_student
-      @house = SortingHat::Houses.find_by_value(@input)
-      puts "It better be #{@house}!"
-    end
+    #def sort_student
+      #house = SortingHat::Houses.find_by_value(@input)
+    #end
 
     def display_house_info
       puts "Find out more about #{@house}:"
