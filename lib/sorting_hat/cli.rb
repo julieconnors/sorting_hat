@@ -1,54 +1,60 @@
 class SortingHat::CLI
+
+    def call
+      greet
+      get_house_info
+      get_user_values
+      menu
+    end
   
     def greet  
-        puts "\nWelcome to Hogwarts!"
-        puts "\nWhat's your name?"
-        name_input = gets.strip
-      if name_input == "Harry Potter"
-        puts "\nThe famous Harry Potter! Let's get you sorted."
-      else
-        puts "\nNice to meet you, #{name_input}! Let's figure out which house is for you."
-      end
+      puts "\nWelcome to Hogwarts!"
+      puts "\nLet's figure out which house is for you."
+    end
+
+    def get_house_info
       SortingHat::API.new.get_houses
-      menu
     end
 
     def menu
-      get_user_values
       sort_student
+      menu_after_sort
       display_house_info
+      ending
     end
-
-    #add validity check
  
     def get_user_values
-      puts "\nChoose a quality that best describes you:"
+      puts "\nPlease select the number for the quality that best describes you:\n"
       SortingHat::Houses.display_values.each.with_index(1) do |value, index|
         puts "#{index}. #{value}"
       end
       @input = gets.strip
     end
+
+    def valid?
+      @input.to_i > 0 && input.to_i < 17
+    end
    
     def sort_student
-      @value = SortingHat::Houses.find_value_by_input(@input)
-      @house = SortingHat::Houses.find_by_value(@value)
-      puts "\nIt better be #{@house.name}!"
+      #if @input.to_i > 0 && @input.to_i < 17
+        @value = SortingHat::Houses.find_value_by_input(@input)
+        @house = SortingHat::Houses.find_by_value(@value)
+        puts "\nIt better be #{@house.name}!"
+      #else
+        #get_user_values
+      #end
     end
 
-    def display_house_info
-      puts "\nFind out more about #{@house.name}:"
-      list_info_menu
-      display_info
-    end
-
-    def list_info_menu
+    def menu_after_sort
+      puts "\nPlease select a number to find out more about #{@house.name} or exit:\n"
       puts "1. Head of House"
       puts "2. House colors"
       puts "3. House ghost"
       puts "4. Founder"
       puts "5. House mascot"
       puts "6. House members"
-      @info_selection = gets.strip
+      puts "7. exit"
+      @selection = gets.strip
     end
 
     def display_house_members
@@ -56,8 +62,8 @@ class SortingHat::CLI
       SortingHat::Characters.find_by_house(@house.name)
     end
 
-    def display_info
-      case @info_selection.to_i
+    def display_house_info
+      case @selection.to_i
       when 1
         puts @house.head_of_house
       when 2
@@ -70,7 +76,13 @@ class SortingHat::CLI
         puts @house.mascot
       when 6 
         display_house_members
+      when 7
+        exit
       end
+    end
+
+    def ending
+      puts "\nGood luck!"
     end
 
 end

@@ -2,7 +2,7 @@ class SortingHat::Houses
     attr_accessor :name, :mascot, :head_of_house, :house_ghost, :founder, :values, :colors, :characters
     
     @@all = []
-    @@values = []
+    @@all_values = []
     @@characters = []
     
     def initialize(name, mascot, head_of_house, house_ghost, founder, values, colors)
@@ -34,11 +34,11 @@ class SortingHat::Houses
     
     def save
       @@all << self
-      @@values << @values
+      @@all_values << @values
     end
     
     def self.display_values
-      @@values.flatten
+      @@all_values.flatten
     end
     
     def self.find_by_name(name)
@@ -50,12 +50,7 @@ class SortingHat::Houses
     end
 
     def self.find_value_by_input(input)
-      @@values.flatten[input.to_i - 1]
+      @@all_values.flatten[input.to_i - 1]
     end
-
-
-    # def self.display_attributes
-    #   @@all.detect{}
-    # end
 
   end

@@ -2,4 +2,4 @@
 
 require_relative "../lib/environment.rb"
 
-SortingHat::CLI.new.greet
+SortingHat::CLI.new.call

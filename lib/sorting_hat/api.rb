@@ -1,4 +1,3 @@
-require "httparty"
 class SortingHat::API
  
         def get_houses
