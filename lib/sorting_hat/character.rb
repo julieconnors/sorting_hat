@@ -1,15 +1,13 @@
 class SortingHat::Characters
-    attr_accessor :name, :role, :house
+    attr_accessor :name, :house
 
     @@all = []
-    @@students = []
 
-    def initialize(name, role, house)
+    def initialize(name, house)
         @name = name
-        @role = role
         @house = house
         save
-        add_student
+        add_character
     end
 
     def self.all
@@ -20,20 +18,16 @@ class SortingHat::Characters
         @@all << self
     end
 
-    def add_student
-        #binding.pry
-        @@all.each do |character| 
-            character.role == "student"
-            @@students << character
+    def add_character
+        SortingHat::Houses.characters << self if !SortingHat::Houses.characters.include?(self)
+    end
+
+    def self.find_by_house(house_arg)
+        SortingHat::Houses.characters.select do |character| 
+            if character.house == house_arg
+                puts character.name
         end
+      end
     end
-
-    def self.find_by_house(house)
-        #binding.pry
-        @@students.select{|student| student.house == house}
-    end
-
-
-
 
 end

@@ -47,12 +47,16 @@ class SortingHat::CLI
       puts "3. House ghost"
       puts "4. Founder"
       puts "5. House mascot"
-      puts "6. Students in House"
+      puts "6. House members"
       @info_selection = gets.strip
     end
 
+    def display_house_members
+      SortingHat::API.new.get_characters
+      SortingHat::Characters.find_by_house(@house.name)
+    end
+
     def display_info
-      #binding.pry
       case @info_selection.to_i
       when 1
         puts @house.head_of_house
@@ -65,16 +69,7 @@ class SortingHat::CLI
       when 5
         puts @house.mascot
       when 6 
-        display_students
-      end
-    end
-
-    def display_students
-      characters = SortingHat::API.new.get_characters
-      characters.select do |character|
-        if character["house"] == @house.name
-        puts character["name"] 
-        end
+        display_house_members
       end
     end
 

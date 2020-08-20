@@ -1,16 +1,16 @@
 class SortingHat::Houses
-    attr_accessor :name, :mascot, :head_of_house, :house_ghost, :founder, :members, :values, :colors
+    attr_accessor :name, :mascot, :head_of_house, :house_ghost, :founder, :values, :colors, :characters
     
     @@all = []
     @@values = []
+    @@characters = []
     
-    def initialize(name, mascot, head_of_house, house_ghost, founder, members, values, colors)
+    def initialize(name, mascot, head_of_house, house_ghost, founder, values, colors)
       @name = name
       @mascot = mascot
       @house_ghost = house_ghost
       @head_of_house = head_of_house
       @founder = founder
-      @members = members
       @values = values
       @colors = colors
       save
@@ -26,6 +26,10 @@ class SortingHat::Houses
     
     def self.all
       @@all
+    end
+
+    def self.characters
+      @@characters
     end
     
     def save
@@ -49,7 +53,7 @@ class SortingHat::Houses
       @@values.flatten[input.to_i - 1]
     end
 
-    
+
     # def self.display_attributes
     #   @@all.detect{}
     # end
