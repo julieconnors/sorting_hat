@@ -5,24 +5,12 @@ class SortingHat::Houses
     @@all_values = []
     @@characters = []
     
-    def initialize(name, mascot, head_of_house, house_ghost, founder, values, colors)
-      @name = name
-      @mascot = mascot
-      @house_ghost = house_ghost
-      @head_of_house = head_of_house
-      @founder = founder
-      @values = values
-      @colors = colors
+    def initialize(attributes)
+      attributes.each do |key, value|
+        self.send("#{key}=", value) if self.respond_to?(key)
+      end
       save
     end
-
-    #metaprogramming version
-    # def initialize(attributes)
-    #   #binding.pry
-    #   attributes.each do |key, value|
-    #     self.send("#{key}=", value) if self.respond_to?(key)
-    #   end
-    # end
     
     def self.all
       @@all

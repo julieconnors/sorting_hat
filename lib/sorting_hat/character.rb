@@ -3,12 +3,13 @@ class SortingHat::Characters
 
     @@all = []
 
-    def initialize(name, house)
-        @name = name
-        @house = house
+    def initialize(attributes)
+        attributes.each do |key, value|
+          self.send("#{key}=", value) if self.respond_to?(key)
+        end
         save
         add_character
-    end
+      end
 
     def self.all
         @@all
