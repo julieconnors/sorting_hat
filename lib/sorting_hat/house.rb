@@ -38,7 +38,7 @@ class SortingHat::Houses
     end
 
     def self.find_value_by_input(input)
-      @@all_values.flatten[input.to_i - 1]
+      @@all_values.flatten[input - 1]
     end
 
   end

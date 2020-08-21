@@ -20,7 +20,6 @@ class SortingHat::CLI
       sort_student
       menu_after_sort
       display_house_info
-      ending
     end
  
     def get_user_values
@@ -28,21 +27,17 @@ class SortingHat::CLI
       SortingHat::Houses.display_values.each.with_index(1) do |value, index|
         puts "#{index}. #{value}"
       end
-      @input = gets.strip
-    end
-
-    def valid?
-      @input.to_i > 0 && input.to_i < 17
+      @input = gets.strip.to_i
+      until @input.between?(1, SortingHat::Houses.display_values.size)
+        puts "Please select a number between 1 and 16:"
+        @input = gets.strip.to_i
+      end
     end
    
     def sort_student
-      #if @input.to_i > 0 && @input.to_i < 17
         @value = SortingHat::Houses.find_value_by_input(@input)
         @house = SortingHat::Houses.find_by_value(@value)
         puts "\nIt better be #{@house.name}!"
-      #else
-        #get_user_values
-      #end
     end
 
     def menu_after_sort
@@ -54,7 +49,12 @@ class SortingHat::CLI
       puts "5. House mascot"
       puts "6. House members"
       puts "7. exit"
-      @selection = gets.strip
+      @selection = gets.strip.to_i
+      until @selection.between?(1, 7)
+        puts "Please select a number between 1 and 7:"
+        @selection = gets.strip.to_i
+      end
+
     end
 
     def display_house_members
@@ -63,7 +63,7 @@ class SortingHat::CLI
     end
 
     def display_house_info
-      case @selection.to_i
+      case @selection
       when 1
         puts @house.head_of_house
       when 2
@@ -79,6 +79,7 @@ class SortingHat::CLI
       when 7
         exit
       end
+    ending
     end
 
     def ending
