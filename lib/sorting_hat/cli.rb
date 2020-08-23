@@ -10,9 +10,9 @@ class SortingHat::CLI
   
   def greet  
     puts "\nWelcome to Hogwarts!"
-    sleep(2)
+    sleep(1)
     puts "\nLet's figure out which house is for you."
-    sleep(2)
+    sleep(1)
   end
 
   def get_house_info
@@ -37,10 +37,14 @@ class SortingHat::CLI
   def sort_student
     value = SortingHat::Houses.find_value_by_input(@input)
     @house = SortingHat::Houses.find_by_value(value)
+    sleep(1)
+    puts "\nHmmm.."
+    sleep(1)
     puts "\nIt better be #{@house.name}!"
   end
 
   def menu_after_sort
+    sleep(2)
     puts "\nPlease select a number to find out more about #{@house.name} or exit:\n"
     puts "1. Head of House"
     puts "2. House colors"
@@ -74,10 +78,13 @@ class SortingHat::CLI
         puts ""
         puts @house.colors
       when 3
+        puts ""
         puts @house.houseGhost
       when 4
+        puts ""
         puts @house.founder
       when 5
+        puts ""
         puts @house.mascot
       when 6 
         display_house_members
