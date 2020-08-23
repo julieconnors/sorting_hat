@@ -4,7 +4,7 @@ class SortingHat::Characters
   @@all = []
 
   def initialize(characters_hash)
-    character_hash.each do |attribute_key, attribute_value|
+    characters_hash.each do |attribute_key, attribute_value|
       self.send("#{attribute_key}=", attribute_value) if self.respond_to?(attribute_key)
     end
     save

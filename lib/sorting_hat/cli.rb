@@ -10,7 +10,9 @@ class SortingHat::CLI
   
   def greet  
     puts "\nWelcome to Hogwarts!"
+    sleep(2)
     puts "\nLet's figure out which house is for you."
+    sleep(2)
   end
 
   def get_house_info
@@ -19,6 +21,7 @@ class SortingHat::CLI
  
   def get_user_values
     puts "\nPlease select the number for the quality that best describes you:\n"
+    sleep(2)
     SortingHat::Houses.display_values.each.with_index(1) do |value, index|
       puts "#{index}. #{value}"
     end
@@ -26,7 +29,7 @@ class SortingHat::CLI
     @input = gets.strip.to_i
       
     until @input.between?(1, SortingHat::Houses.display_values.size)
-      puts "Please select a number between 1 and 16:"
+      puts "\nPlease select a number between 1 and 16:"
       @input = gets.strip.to_i
     end
   end
@@ -50,7 +53,7 @@ class SortingHat::CLI
     @selection = gets.strip.to_i
       
     until @selection.between?(1, 7)
-      puts "Please select a number between 1 and 7:"
+      puts "\nPlease select a number between 1 and 7:"
       @selection = gets.strip.to_i
     end
     display_house_info
@@ -65,8 +68,10 @@ class SortingHat::CLI
     if @selection != 7
       case @selection
       when 1
+        puts ""
         puts @house.headOfHouse
       when 2
+        puts ""
         puts @house.colors
       when 3
         puts @house.houseGhost
